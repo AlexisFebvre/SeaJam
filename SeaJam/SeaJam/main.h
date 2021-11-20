@@ -1,4 +1,18 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include "input.h"
 
-const int WIN_WIDTH = 1280;
-const int WIN_HEIGHT = 720;
+// namespaces
+using namespace std;
+
+// prototypes
+void loadFont();
+void setText(sf::Text& text, string str);
+void constantInputs();
+
+// variables
+sf::Font font;
+
+const int WIN_WIDTH = sf::VideoMode::getDesktopMode().width;
+const int WIN_HEIGHT = sf::VideoMode::getDesktopMode().height;

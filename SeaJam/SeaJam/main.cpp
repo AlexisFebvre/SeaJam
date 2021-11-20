@@ -1,9 +1,13 @@
 #include "main.h"
 
+
+
+// variables
+sf::Text helloWorld("Hello world !", font);
 sf::RenderWindow window; // create the window's variable
 
-// prototypes
-void handleEvents(sf::Event event, sf::RenderWindow& window);
+// input handler
+Input input;
 
 int main()
 {
@@ -11,32 +15,56 @@ int main()
 	window.create(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT, 32), "SeaJam");
 	window.setVerticalSyncEnabled(true);
 
+	// text
+	loadFont();
+	setText(helloWorld, "Hello world !");
+
+
+
+
 	// game loop
 	while (window.isOpen())
 	{
+		// constant inputs
+		constantInputs();
 		// handle events
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			handleEvents(event, window);
+			input.inputHandler(event, window);
 		}
 
+		// update stuff here
 		
+		////////////////////
+
+
+		// draw stuff here	
+		window.clear(); // clear the window
+		window.draw(helloWorld);
+
+		// displaying all stuff
+		window.display();
 
 	}
 
 	return 0;
 }
 
-void handleEvents(sf::Event event, sf::RenderWindow& window)
+
+void loadFont()
 {
-		switch (event.type)
-		{
-			// window events
-		case sf::Event::Closed:
-			window.close();
-			break;
-		default:
-			break;
-		}
+	if (!font.loadFromFile("res/fonts/poppins.ttf"))
+	{
+		cout << "cannot load res/fonts/poppins.ttf" << endl;
+	}
+}
+
+
+void setText(sf::Text& text, string str)
+{
+	text.setString(str);
+	text.setCharacterSize(100);
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
