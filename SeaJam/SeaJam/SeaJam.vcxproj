@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fish.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

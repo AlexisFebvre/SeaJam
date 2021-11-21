@@ -1,2 +1,7 @@
 ﻿  main.cpp
-  SeaJam.vcxproj -> D:\Devellopement\GameJam\SeaJam\SeaJam\x64\Debug\SeaJam.exe
+D:\Devellopement\Game Jam\SeaJamSflmGit\SeaJam\SeaJam\fish.h(10,28): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Devellopement\Game Jam\SeaJamSflmGit\SeaJam\SeaJam\fish.h(21,27): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Devellopement\Game Jam\SeaJamSflmGit\SeaJam\SeaJam\main.cpp(63,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Devellopement\Game Jam\SeaJamSflmGit\SeaJam\SeaJam\main.cpp(91,20): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Devellopement\Game Jam\SeaJamSflmGit\SeaJam\SeaJam\main.cpp(92,26): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+  SeaJam.vcxproj -> D:\Devellopement\Game Jam\SeaJamSflmGit\SeaJam\x64\Debug\SeaJam.exe
