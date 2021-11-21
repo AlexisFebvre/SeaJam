@@ -1,0 +1,2 @@
+error 0 : the progamm finished normaly
+error -1 : the programm failed to load a texture

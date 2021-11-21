@@ -16,6 +16,7 @@ Input::Button Input::getButton(void) const
 // input handler function
 void Input::inputHandler(sf::Event event, sf::RenderWindow& window)
 {
+	button.down = button.escape = button.space = button.up = false;
 	switch (event.type)
 	{
 		// window events
