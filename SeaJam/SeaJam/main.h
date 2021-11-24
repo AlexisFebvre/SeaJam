@@ -24,6 +24,7 @@ void fishDown(sf::Sprite& fish);
 // variables
 sf::Font font;
 double oceanSpeed = -1;
+int score = 0;
 
 // sprites
 sf::Sprite fishSprite;

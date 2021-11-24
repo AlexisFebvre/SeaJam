@@ -3,7 +3,6 @@
 
 
 // variables
-sf::Text helloWorld("Hello world !", font);
 sf::RenderWindow window; // create the window's variable
 
 
@@ -17,7 +16,16 @@ int phase = 0;
 
 
 // years counter
-int year = 1950;
+int yearsCounter = 1950;
+sf::Text yearsCounterText("years : " + to_string(yearsCounter), font);
+
+////////////////
+
+// trash counter
+int trashCounter = 325;
+sf::Text trashCounterText("trash count : " + to_string(trashCounter) + " MT", font);
+////////////////
+
 
 // input handler
 Input input;
@@ -31,7 +39,14 @@ int main(int argc, char* argv[])
 
 	// text
 	loadFont();
-	setText(helloWorld, "Hello world !");
+	// years counter
+	yearsCounterText.setFillColor(sf::Color::Black);
+	yearsCounterText.setCharacterSize(60);
+	yearsCounterText.move(25, 0);
+	// trash counter
+	trashCounterText.setFillColor(sf::Color::Black);
+	trashCounterText.setCharacterSize(60);
+	trashCounterText.move(650, 0);
 
 	// fish
 	sf::Texture fishTexture;
@@ -41,7 +56,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 	fishSprite.setTexture(fishTexture);
-	fishSprite.setPosition(15, 500);
+	fishSprite.setPosition(25, 500);
 	///////
 
 
@@ -63,6 +78,8 @@ int main(int argc, char* argv[])
 	oceanSpriteSecond.setPosition(gap, 150);
 	///////////////
 
+	// tmp score
+	double tmpScore = 0;
 
 	// game loop
 	while (window.isOpen())
@@ -132,15 +149,22 @@ int main(int argc, char* argv[])
 		cout << to_string(oceanSpeed) << endl;
 		////////
 
+		// score
+		tmpScore += 0.01;
+		score = round(tmpScore);
+		////////
+
 		////////////////////
 
 
 		// draw stuff here	
 		window.clear(sf::Color(255, 255, 255, 255)); // clear the window
-		window.draw(helloWorld);
 		window.draw(fishSprite);
 		window.draw(oceanSprite);
 		window.draw(oceanSpriteSecond);
+
+		window.draw(yearsCounterText);
+		window.draw(trashCounterText);
 
 		// displaying all stuff
 		window.display();
@@ -200,15 +224,12 @@ void checkBtn()
 	} 
 	else if (input.getButton().space)
 	{
-		helloWorld.setString("space");
 	}
 	else if (input.getButton().down)
 	{
-		helloWorld.setString("Down");
 	}
 	else if (input.getButton().up)
 	{
-		helloWorld.setString("Up");
 	}
 
 	// released
