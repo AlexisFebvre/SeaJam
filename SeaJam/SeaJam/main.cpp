@@ -18,12 +18,16 @@ int phase = 0;
 // years counter
 int yearsCounter = 1950;
 sf::Text yearsCounterText("years : " + to_string(yearsCounter), font);
-
+int tmpYearsCounter = yearsCounter;
+double yearSteps = 0;
 ////////////////
 
 // trash counter
-int trashCounter = 325;
+int trashCounter = trashCount;
+long previousTrashCount = trashCount;
+int trashToDisplay = trashCount - previousTrashCount;
 sf::Text trashCounterText("trash count : " + to_string(trashCounter) + " MT", font);
+char trashPhase = 'A';
 ////////////////
 
 
@@ -80,6 +84,14 @@ int main(int argc, char* argv[])
 
 	// tmp score
 	double tmpScore = 0;
+
+	srand(time(NULL));
+
+
+	// init trash
+	initTrashTexture();
+	createTrash(trashCount, trashArray);
+
 
 	// game loop
 	while (window.isOpen())
@@ -144,9 +156,6 @@ int main(int argc, char* argv[])
 			oceanSpeed -= 0.005;
 		}
 
-		
-
-		cout << to_string(oceanSpeed) << endl;
 		////////
 
 		// score
@@ -154,14 +163,92 @@ int main(int argc, char* argv[])
 		score = round(tmpScore);
 		////////
 
+		// years
+		yearSteps += 0.01;
+
+		if (yearSteps >= 1)
+		{
+			yearsCounter++;
+			yearSteps = 0;
+		}
+
+
+		// trash
+		if (tmpYearsCounter != yearsCounter)
+		{
+			tmpYearsCounter = yearsCounter;
+			float tmpIncrementation;
+			switch (trashPhase)
+			{
+			case 'A':
+				tmpIncrementation = 1.8;
+				break;
+			case 'B':
+				tmpIncrementation = 6;
+				break;
+			case 'C':
+				tmpIncrementation = -4;
+				break;
+			case 'D':
+				tmpIncrementation = 26.5;
+				break;
+
+			default:
+				break;
+			}
+			trashCount += round(tmpIncrementation);
+
+			switch (yearsCounter)
+			{
+			case 1975:
+				trashPhase = 'B';
+				break;
+			case 2005:
+				trashPhase = 'C';
+				break;
+			case 2010:
+				trashPhase = 'D';
+				break;
+			default:
+				break;
+			}
+			createTrash(tmpIncrementation, trashArray);
+			trashCounter += tmpIncrementation;
+		}
+
+		////////
+
+		// counter
+		trashCounterText.setString("trash count : " + to_string(trashCounter) + "MT");
+		yearsCounterText.setString("years : " + to_string(yearsCounter));
+
 		////////////////////
 
 
 		// draw stuff here	
 		window.clear(sf::Color(255, 255, 255, 255)); // clear the window
 		window.draw(fishSprite);
+
+
+		for (int i = 0; i < trashArray.size(); i++)
+		{
+			window.draw(trashArray[i]);
+		}
+
+		for (int i = 0; i < trashArray.size(); i++)
+		{
+			if (trashArray[i].getPosition().x < 0)
+			{
+				trashArray.erase(trashArray.begin() + i);
+			}
+			trashArray[i].move(oceanSpeed * 0.5, 0);
+		}
+
+		// ocean
 		window.draw(oceanSprite);
 		window.draw(oceanSpriteSecond);
+
+
 
 		window.draw(yearsCounterText);
 		window.draw(trashCounterText);

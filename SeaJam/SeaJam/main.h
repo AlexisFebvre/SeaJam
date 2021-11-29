@@ -2,12 +2,15 @@
 #define MAIN_H
 
 #include <iostream>
+#include <vector>
+#include <stdlib.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <Windows.h>
 #include "input.h"
 #include "fish.h"
+#include "trash.h"
 
 // namespaces
 using namespace std;
@@ -18,8 +21,11 @@ void setText(sf::Text& text, string str);
 void checkConstBtn();
 void checkBtn();
 // fish prototype
-void fishUp(sf::Sprite& fish);
-void fishDown(sf::Sprite& fish);
+
+// trash prototypes
+void initTrashTexture();
+void createTrash(int count, std::vector<sf::Sprite>& spriteArray);
+
 
 // variables
 sf::Font font;
@@ -28,6 +34,11 @@ int score = 0;
 
 // sprites
 sf::Sprite fishSprite;
+
+// trash
+vector<sf::Sprite> trashArray;
+vector<sf::Sprite> trashOnScreenArray;
+long int trashCount = 0;
 
 //const int WIN_WIDTH = sf::VideoMode::getDesktopMode().width;
 //const int WIN_HEIGHT = sf::VideoMode::getDesktopMode().height;
